@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_api/models/news_channel_headlines_model.dart';
 
@@ -12,6 +13,9 @@ class HeadlinesRepositoty {
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(body);
+      }
       return NewsChannelHeadlinesModel.fromJson(body);
     }
     throw Exception('Error');

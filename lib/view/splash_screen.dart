@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
@@ -44,6 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
             Text(
               "TOP HEADLINES",
               style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
                 letterSpacing: 0.6,
                 color: Colors.grey.shade700,
               ),
