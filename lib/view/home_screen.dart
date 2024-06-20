@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news_api/models/news_channel_headlines_model.dart';
+import 'package:news_api/view/categories_screen.dart';
 import 'package:news_api/view_model/news_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final format = DateFormat('MMMM dd, yyyy');
 
   FiltersList? selectedMenu;
-  String name = "bbc-news";
+  String source = "bbc-news";
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CategoriesScreen()));
+          },
           icon: Image.asset(
             'images/category_icon.png',
             filterQuality: FilterQuality.high,
@@ -58,22 +64,22 @@ class _HomeScreenState extends State<HomeScreen> {
             initialValue: selectedMenu,
             onSelected: (FiltersList menu) {
               if (FiltersList.bbcNews.name == menu.name) {
-                name = "bbc-news";
+                source = "bbc-news";
               }
               if (FiltersList.aryNews.name == menu.name) {
-                name = "ary-news";
+                source = "ary-news";
               }
               if (FiltersList.cnn.name == menu.name) {
-                name = "cnn-news";
+                source = "cnn-news";
               }
               if (FiltersList.alJazeera.name == menu.name) {
-                name = "al-jazeera-english";
+                source = "al-jazeera-english";
               }
               if (FiltersList.independent.name == menu.name) {
-                name = "abc-news";
+                source = "abc-news";
               }
               if (FiltersList.bbcSport.name == menu.name) {
-                name = "bbc-sport";
+                source = "bbc-sport";
               }
               setState(() {});
             },
@@ -128,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * 0.55,
             width: width,
             child: FutureBuilder<NewsChannelHeadlinesModel>(
-              future: newsViewModel.fetchNewsHeadlinesApi(name),
+              future: newsViewModel.fetchNewsHeadlinesApi(source),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
