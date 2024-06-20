@@ -4,8 +4,8 @@ import 'package:news_api/repository/headlines_repositoty.dart';
 class NewsViewModel {
   final repo = HeadlinesRepositoty();
 
-  Future<NewsChannelHeadlinesModel> fetchNewsHeadlinesApi() async {
-    final response = await repo.fetchNewsHeadlinesApi();
+  Future<NewsChannelHeadlinesModel> fetchNewsHeadlinesApi(String source) async {
+    final response = await repo.fetchNewsHeadlinesApi(source);
     return response;
   }
 }

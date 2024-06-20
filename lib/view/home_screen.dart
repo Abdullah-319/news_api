@@ -19,6 +19,7 @@ enum FiltersList {
   independent,
   cnn,
   alJazeera,
+  bbcSport,
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -65,6 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
               if (FiltersList.cnn.name == menu.name) {
                 name = "cnn-news";
               }
+              if (FiltersList.alJazeera.name == menu.name) {
+                name = "al-jazeera-english";
+              }
+              if (FiltersList.independent.name == menu.name) {
+                name = "abc-news";
+              }
+              if (FiltersList.bbcSport.name == menu.name) {
+                name = "bbc-sport";
+              }
               setState(() {});
             },
             icon: const Icon(
@@ -76,6 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 value: FiltersList.bbcNews,
                 child: Text(
                   "BBC-News",
+                ),
+              ),
+              const PopupMenuItem(
+                value: FiltersList.bbcSport,
+                child: Text(
+                  "BBC-Sport",
                 ),
               ),
               const PopupMenuItem(
@@ -112,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * 0.55,
             width: width,
             child: FutureBuilder<NewsChannelHeadlinesModel>(
-              future: newsViewModel.fetchNewsHeadlinesApi(),
+              future: newsViewModel.fetchNewsHeadlinesApi(name),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
