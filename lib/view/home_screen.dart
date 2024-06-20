@@ -13,9 +13,20 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+enum FiltersList {
+  bbcNews,
+  aryNews,
+  independent,
+  cnn,
+  alJazeera,
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   NewsViewModel newsViewModel = NewsViewModel();
   final format = DateFormat('MMMM dd, yyyy');
+
+  FiltersList? selectedMenu;
+  String name = "bbc-news";
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +52,52 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 18,
           ),
         ),
+        actions: [
+          PopupMenuButton<FiltersList>(
+            initialValue: selectedMenu,
+            onSelected: (FiltersList menu) {
+              if (FiltersList.bbcNews.name == menu.name) {
+                name = "bbc-news";
+              }
+            },
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+            itemBuilder: (context) => <PopupMenuEntry<FiltersList>>[
+              const PopupMenuItem(
+                value: FiltersList.bbcNews,
+                child: Text(
+                  "BBC-News",
+                ),
+              ),
+              const PopupMenuItem(
+                value: FiltersList.aryNews,
+                child: Text(
+                  "Ary-News",
+                ),
+              ),
+              const PopupMenuItem(
+                value: FiltersList.alJazeera,
+                child: Text(
+                  "AlJazeera-News",
+                ),
+              ),
+              const PopupMenuItem(
+                value: FiltersList.independent,
+                child: Text(
+                  "Independent-News",
+                ),
+              ),
+              const PopupMenuItem(
+                value: FiltersList.cnn,
+                child: Text(
+                  "CNN-News",
+                ),
+              ),
+            ],
+          )
+        ],
       ),
       body: ListView(
         children: [
