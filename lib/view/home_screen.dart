@@ -59,6 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
               if (FiltersList.bbcNews.name == menu.name) {
                 name = "bbc-news";
               }
+              if (FiltersList.aryNews.name == menu.name) {
+                name = "ary-news";
+              }
+              if (FiltersList.cnn.name == menu.name) {
+                name = "cnn-news";
+              }
+              setState(() {});
             },
             icon: const Icon(
               Icons.more_vert,
