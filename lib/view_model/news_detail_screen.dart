@@ -50,7 +50,7 @@ class NewsDetailScreen extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   filterQuality: FilterQuality.high,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
