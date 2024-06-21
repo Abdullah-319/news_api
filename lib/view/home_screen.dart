@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Headline News",
+          "Headlines",
           style: GoogleFonts.poppins(
             fontSize: 24,
             fontWeight: FontWeight.w700,
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverToBoxAdapter(
-              child: Container(
+              child: SizedBox(
                 height: height * 0.5, // Adjust the height as needed
                 child: HorizontalHeadlines(source: source),
               ),

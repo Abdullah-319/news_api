@@ -24,7 +24,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
+    // final height = MediaQuery.sizeOf(context).height;
     // final width = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
@@ -44,18 +44,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
         ),
       ),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: height * 0.07, // Adjust the height as needed
-                child: CategoriesListView(categoriesList: categoriesList),
-              ),
-            ),
-          ];
-        },
-        body: CategoryNewsListView(category: category),
+      body: Column(
+        children: [
+          CategoriesListView(categoriesList: categoriesList),
+          CategoryNewsListView(category: category),
+        ],
       ),
     );
   }
