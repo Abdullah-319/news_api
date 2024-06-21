@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:news_api/models/category_news_model.dart';
 import 'package:news_api/models/news_channel_headlines_model.dart';
 import 'package:news_api/view/categories_screen.dart';
+import 'package:news_api/view_model/news_detail_screen.dart';
 import 'package:news_api/view_model/news_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -154,7 +155,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           .data!.articles![index].publishedAt
                           .toString());
 
-                      return Container(
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewsDetailScreen(
+                                      imageUrl: snapshot
+                                          .data!.articles![index].urlToImage
+                                          .toString(),
+                                      title: snapshot
+                                          .data!.articles![index].title
+                                          .toString(),
+                                      source: snapshot
+                                          .data!.articles![index].source!.name
+                                          .toString(),
+                                      datePublished:
+                                          format.format(dateTime).toString(),
+                                      description: snapshot
+                                          .data!.articles![index].description
+                                          .toString())));
+                        },
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
