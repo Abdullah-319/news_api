@@ -40,16 +40,20 @@ class _SplashScreenState extends State<SplashScreen> {
             width: width,
           ),
           SizedBox(height: height * 0.04),
-          Text(
-            "TOP HEADLINES",
-            style: GoogleFonts.poppins(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-              letterSpacing: 0.6,
-              color: Colors.grey.shade700,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+            child: Text(
+              "News Headlines",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                letterSpacing: 0.6,
+                color: Colors.grey.shade700,
+              ),
             ),
           ),
-          SizedBox(height: height * 0.04),
+          SizedBox(height: height * 0.06),
           const SpinKitChasingDots(
             color: Colors.blue,
             size: 40,
