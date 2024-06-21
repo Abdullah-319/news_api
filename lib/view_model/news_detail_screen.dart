@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewsDetailScreen extends StatelessWidget {
@@ -34,83 +33,85 @@ class NewsDetailScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(35),
-                topRight: Radius.circular(35),
-              ),
-              child: SizedBox(
-                height: height * 0.50,
-                width: width,
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  filterQuality: FilterQuality.high,
-                  fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: height,
+          width: width,
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(35),
+                  topRight: Radius.circular(35),
                 ),
-              ),
-            ),
-            Positioned(
-              top: height * 0.45,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.05,
-                  vertical: height * 0.03,
-                ),
-                height: height,
-                width: width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(35),
-                    topRight: Radius.circular(35),
+                child: SizedBox(
+                  height: height * 0.50,
+                  width: width,
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.poppins(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                      ),
+              ),
+              Positioned(
+                top: height * 0.45,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.05,
+                    vertical: height * 0.03,
+                  ),
+                  height: height,
+                  width: width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
                     ),
-                    SizedBox(height: height * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          source,
-                          style: GoogleFonts.poppins(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.poppins(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
                         ),
-                        Text(
-                          datePublished,
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.03),
-                    Text(
-                      description,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
                       ),
-                    ),
-                  ],
+                      SizedBox(height: height * 0.02),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            source,
+                            style: GoogleFonts.poppins(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            datePublished,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: height * 0.03),
+                      Text(
+                        description,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
