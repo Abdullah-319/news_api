@@ -30,7 +30,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
     super.initState();
   }
 
-  bool imageExists = false;
+  bool imageExists = true;
 
   Future<void> checkImageExists(String uri) async {
     try {
