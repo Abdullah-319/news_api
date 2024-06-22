@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
-class NewsDetailScreen extends StatelessWidget {
+class NewsDetailScreen extends StatefulWidget {
   const NewsDetailScreen({
     super.key,
     required this.imageUrl,
@@ -17,6 +18,39 @@ class NewsDetailScreen extends StatelessWidget {
   final String source;
   final String datePublished;
   final String description;
+
+  @override
+  State<NewsDetailScreen> createState() => _NewsDetailScreenState();
+}
+
+class _NewsDetailScreenState extends State<NewsDetailScreen> {
+  @override
+  void initState() {
+    checkImageExists(widget.imageUrl);
+    super.initState();
+  }
+
+  bool imageExists = false;
+
+  Future<void> checkImageExists(String uri) async {
+    try {
+      final response = await http.get(Uri.parse(uri));
+      if (response.statusCode == 200) {
+        setState(() {
+          imageExists = true;
+        });
+      } else {
+        setState(() {
+          imageExists = false;
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        imageExists = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +80,19 @@ class NewsDetailScreen extends StatelessWidget {
                 child: SizedBox(
                   height: height * 0.50,
                   width: width,
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    filterQuality: FilterQuality.high,
-                    fit: BoxFit.cover,
-                  ),
+                  child: imageExists == true
+                      ? CachedNetworkImage(
+                          imageUrl: widget.imageUrl,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.cover,
+                        )
+                      : Center(
+                          child: Icon(
+                            Icons.error_outline,
+                            color: Colors.red,
+                            size: 40,
+                          ),
+                        ),
                 ),
               ),
               Positioned(
@@ -72,7 +114,7 @@ class NewsDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        title,
+                        widget.title,
                         style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -83,14 +125,14 @@ class NewsDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            source,
+                            widget.source,
                             style: GoogleFonts.poppins(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            datePublished,
+                            widget.datePublished,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                             ),
@@ -99,7 +141,7 @@ class NewsDetailScreen extends StatelessWidget {
                       ),
                       SizedBox(height: height * 0.03),
                       Text(
-                        description,
+                        widget.description,
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,

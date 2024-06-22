@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:news_api/models/news_channel_headlines_model.dart';
-import 'package:news_api/view_model/news_detail_screen.dart';
+import 'package:news_api/view/news_detail_screen.dart';
 import 'package:news_api/view_model/news_view_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,10 +27,8 @@ class HorizontalHeadlines extends StatelessWidget {
         final response = await http.get(Uri.parse(uri));
         if (response.statusCode == 200) {
           return true;
-        } else if (response.statusCode == 404) {
-          return false;
         } else {
-          throw Exception('Failed to load image: ${response.statusCode}');
+          return false;
         }
       } catch (e) {
         print('Error: $e');
