@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return <Widget>[
             SliverToBoxAdapter(
               child: SizedBox(
-                height: height * 0.5, // Adjust the height as needed
+                height: height * 0.5,
                 child: HorizontalHeadlines(source: source),
               ),
             ),
