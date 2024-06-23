@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/link.dart';
 
 class NewsDetailScreen extends StatefulWidget {
   const NewsDetailScreen({
@@ -10,6 +11,7 @@ class NewsDetailScreen extends StatefulWidget {
     required this.source,
     required this.datePublished,
     required this.description,
+    required this.webUrl,
   });
 
   final String imageUrl;
@@ -17,14 +19,13 @@ class NewsDetailScreen extends StatefulWidget {
   final String source;
   final String datePublished;
   final String description;
+  final String webUrl;
 
   @override
   State<NewsDetailScreen> createState() => _NewsDetailScreenState();
 }
 
 class _NewsDetailScreenState extends State<NewsDetailScreen> {
-  
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -53,13 +54,11 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                 child: SizedBox(
                   height: height * 0.50,
                   width: width,
-                  child:
-                       CachedNetworkImage(
-                          imageUrl: widget.imageUrl,
-                          filterQuality: FilterQuality.high,
-                          fit: BoxFit.cover,
-                        ),
-                      
+                  child: CachedNetworkImage(
+                    imageUrl: widget.imageUrl,
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Positioned(
@@ -113,6 +112,29 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
+                      ),
+                      SizedBox(height: height * 0.05),
+                      Link(
+                        uri: Uri.parse(widget.webUrl),
+                        target: LinkTarget.blank,
+                        builder: (BuildContext ctx, FollowLink? openLink) {
+                          return TextButton(
+                            onPressed: openLink,
+                            child: Text(
+                              'Read more...',
+                              style: GoogleFonts.poppins(
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.amberAccent,
+                                decorationStyle: TextDecorationStyle.double,
+                                decorationThickness: 2,
+                                letterSpacing: 3,
+                                color: Colors.amberAccent,
+                                fontWeight: FontWeight.bold,
+                                fontSize: width * 0.05,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

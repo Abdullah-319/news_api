@@ -55,7 +55,8 @@ class CategoryNewsListView extends StatelessWidget {
                               datePublished: format.format(dateTime).toString(),
                               description: snapshot
                                   .data!.articles![index].description
-                                  .toString())));
+                                  .toString(),
+                                  webUrl: snapshot.data!.articles![index].url.toString(),)));
                 },
                 child: snapshot.data!.articles![index].title.toString() ==
                             "[Removed]" ||
