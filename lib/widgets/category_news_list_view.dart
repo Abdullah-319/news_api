@@ -31,6 +31,22 @@ class CategoryNewsListView extends StatelessWidget {
               size: height * 0.08,
             ),
           );
+        } else if (snapshot.data!.articles!.isEmpty) {
+          return Center(
+            child: Column(
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                Text(
+                  "Couldn't load news at the time, kindly refresh",
+                  style: GoogleFonts.poppins(fontSize: width * 0.09),
+                ),
+              ],
+            ),
+          );
         } else {
           return ListView.builder(
             itemCount: snapshot.data!.articles!.length,
@@ -41,22 +57,21 @@ class CategoryNewsListView extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewsDetailScreen(
-                              imageUrl: snapshot
-                                  .data!.articles![index].urlToImage
-                                  .toString(),
-                              title: snapshot.data!.articles![index].title
-                                  .toString(),
-                              source: snapshot
-                                  .data!.articles![index].source!.name
-                                  .toString(),
-                              datePublished: format.format(dateTime).toString(),
-                              description: snapshot
-                                  .data!.articles![index].description
-                                  .toString(),
-                                  webUrl: snapshot.data!.articles![index].url.toString(),)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsDetailScreen(
+                        imageUrl: snapshot.data!.articles![index].urlToImage
+                            .toString(),
+                        title: snapshot.data!.articles![index].title.toString(),
+                        source: snapshot.data!.articles![index].source!.name
+                            .toString(),
+                        datePublished: format.format(dateTime).toString(),
+                        description: snapshot.data!.articles![index].description
+                            .toString(),
+                        webUrl: snapshot.data!.articles![index].url.toString(),
+                      ),
+                    ),
+                  );
                 },
                 child: snapshot.data!.articles![index].title.toString() ==
                             "[Removed]" ||

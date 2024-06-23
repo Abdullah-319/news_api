@@ -36,6 +36,8 @@ class HorizontalHeadlines extends StatelessWidget {
       }
     }
 
+
+
     return SizedBox(
       height: height * 0.55,
       width: width,
@@ -49,6 +51,22 @@ class HorizontalHeadlines extends StatelessWidget {
                 size: height * 0.08,
               ),
             );
+          } else if (snapshot.data!.articles!.isEmpty) {
+            return Center(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 40,
+                  ),
+                  Text(
+                    "Couldn't load news at the time",
+                    style: GoogleFonts.poppins(fontSize: width * 0.09),
+                  ),
+                ],
+              ),
+            );
           } else {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -56,28 +74,31 @@ class HorizontalHeadlines extends StatelessWidget {
               itemBuilder: (context, index) {
                 final dateTime = DateTime.parse(
                     snapshot.data!.articles![index].publishedAt.toString());
-
+    
                 return GestureDetector(
                   onTap: () {
-                    print(
-                        snapshot.data!.articles![index].urlToImage.toString());
+                    print(snapshot.data!.articles![index].urlToImage
+                        .toString());
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => NewsDetailScreen(
-                                imageUrl: snapshot
-                                    .data!.articles![index].urlToImage
-                                    .toString(),
-                                title: snapshot.data!.articles![index].title
-                                    .toString(),
-                                source: snapshot
-                                    .data!.articles![index].source!.name
-                                    .toString(),
-                                datePublished:
-                                    format.format(dateTime).toString(),
-                                description: snapshot
-                                    .data!.articles![index].description
-                                    .toString(),webUrl: snapshot.data!.articles![index].url.toString(),)));
+                                  imageUrl: snapshot
+                                      .data!.articles![index].urlToImage
+                                      .toString(),
+                                  title: snapshot.data!.articles![index].title
+                                      .toString(),
+                                  source: snapshot
+                                      .data!.articles![index].source!.name
+                                      .toString(),
+                                  datePublished:
+                                      format.format(dateTime).toString(),
+                                  description: snapshot
+                                      .data!.articles![index].description
+                                      .toString(),
+                                  webUrl: snapshot.data!.articles![index].url
+                                      .toString(),
+                                )));
                   },
                   child: snapshot.data!.articles![index].title.toString() ==
                               "[Removed]" ||
@@ -94,7 +115,8 @@ class HorizontalHeadlines extends StatelessWidget {
                           children: [
                             Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: height * 0.02,
+                                horizontal: width * 0.05,
+                                vertical: height * 0.02,
                               ),
                               height: height,
                               width: width * 0.9,
@@ -124,7 +146,7 @@ class HorizontalHeadlines extends StatelessWidget {
                               bottom: 20,
                               child: Card(
                                 color: Colors.grey.shade300,
-                                elevation: 25,
+                                elevation: 10,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 child: Container(
