@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 source = "ary-news";
               }
               if (FiltersList.cnn.name == menu.name) {
-                source = "cnn-news";
+                source = "cbc-news";
               }
               if (FiltersList.alJazeera.name == menu.name) {
                 source = "al-jazeera-english";
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const PopupMenuItem(
                 value: FiltersList.cnn,
                 child: Text(
-                  "CNN-News",
+                  "CBC-News",
                 ),
               ),
             ],

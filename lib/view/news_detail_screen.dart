@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 class NewsDetailScreen extends StatefulWidget {
   const NewsDetailScreen({
@@ -24,33 +23,7 @@ class NewsDetailScreen extends StatefulWidget {
 }
 
 class _NewsDetailScreenState extends State<NewsDetailScreen> {
-  @override
-  void initState() {
-    checkImageExists(widget.imageUrl);
-    super.initState();
-  }
-
-  bool imageExists = true;
-
-  Future<void> checkImageExists(String uri) async {
-    try {
-      final response = await http.get(Uri.parse(uri));
-      if (response.statusCode == 200) {
-        setState(() {
-          imageExists = true;
-        });
-      } else {
-        setState(() {
-          imageExists = false;
-        });
-      }
-    } catch (e) {
-      print('Error: $e');
-      setState(() {
-        imageExists = false;
-      });
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -80,19 +53,13 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                 child: SizedBox(
                   height: height * 0.50,
                   width: width,
-                  child: imageExists == true
-                      ? CachedNetworkImage(
+                  child:
+                       CachedNetworkImage(
                           imageUrl: widget.imageUrl,
                           filterQuality: FilterQuality.high,
                           fit: BoxFit.cover,
-                        )
-                      : Center(
-                          child: Icon(
-                            Icons.error_outline,
-                            color: Colors.red,
-                            size: 40,
-                          ),
                         ),
+                      
                 ),
               ),
               Positioned(
