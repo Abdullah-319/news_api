@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/link.dart';
 
-class NewsDetailScreen extends StatefulWidget {
+class NewsDetailScreen extends StatelessWidget {
   const NewsDetailScreen({
     super.key,
     required this.imageUrl,
@@ -22,11 +22,6 @@ class NewsDetailScreen extends StatefulWidget {
   final String webUrl;
 
   @override
-  State<NewsDetailScreen> createState() => _NewsDetailScreenState();
-}
-
-class _NewsDetailScreenState extends State<NewsDetailScreen> {
-  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
@@ -42,7 +37,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: height * 1.02,
+          height: height * 1.2,
           width: width,
           child: Stack(
             children: [
@@ -52,17 +47,17 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                   topRight: Radius.circular(35),
                 ),
                 child: SizedBox(
-                  height: height * 0.50,
+                  height: height * 0.60,
                   width: width,
                   child: CachedNetworkImage(
-                    imageUrl: widget.imageUrl,
+                    imageUrl: imageUrl,
                     filterQuality: FilterQuality.high,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Positioned(
-                top: height * 0.44,
+                top: height * 0.56,
                 child: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: width * 0.05,
@@ -80,7 +75,9 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                   child: Column(
                     children: [
                       Text(
-                        widget.title,
+                        title,
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -91,14 +88,14 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.source,
+                            source,
                             style: GoogleFonts.poppins(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            widget.datePublished,
+                            datePublished,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                             ),
@@ -107,7 +104,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                       ),
                       SizedBox(height: height * 0.03),
                       Text(
-                        widget.description,
+                        description,
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
@@ -117,7 +114,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                       ),
                       SizedBox(height: height * 0.05),
                       Link(
-                        uri: Uri.parse(widget.webUrl),
+                        uri: Uri.parse(webUrl),
                         target: LinkTarget.blank,
                         builder: (BuildContext ctx, FollowLink? openLink) {
                           return TextButton(
