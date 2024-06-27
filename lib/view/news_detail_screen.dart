@@ -42,7 +42,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: height,
+          height: height * 1.02,
           width: width,
           child: Stack(
             children: [
@@ -62,13 +62,13 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                 ),
               ),
               Positioned(
-                top: height * 0.45,
+                top: height * 0.44,
                 child: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: width * 0.05,
                     vertical: height * 0.03,
                   ),
-                  height: height,
+                  height: height * 1.2,
                   width: width,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -108,6 +108,8 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                       SizedBox(height: height * 0.03),
                       Text(
                         widget.description,
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -123,19 +125,16 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                             child: Text(
                               'Read more...',
                               style: GoogleFonts.poppins(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.amberAccent,
-                                decorationStyle: TextDecorationStyle.double,
-                                decorationThickness: 2,
-                                letterSpacing: 3,
-                                color: Colors.amberAccent,
-                                fontWeight: FontWeight.bold,
-                                fontSize: width * 0.05,
+                                letterSpacing: 2,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w800,
+                                fontSize: width * 0.055,
                               ),
                             ),
                           );
                         },
                       ),
+                      SizedBox(height: height * 0.05),
                     ],
                   ),
                 ),

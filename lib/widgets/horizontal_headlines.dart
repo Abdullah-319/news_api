@@ -36,8 +36,6 @@ class HorizontalHeadlines extends StatelessWidget {
       }
     }
 
-
-
     return SizedBox(
       height: height * 0.55,
       width: width,
@@ -49,6 +47,22 @@ class HorizontalHeadlines extends StatelessWidget {
               child: SpinKitCircle(
                 color: Colors.blue,
                 size: height * 0.08,
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.none) {
+            return Center(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 40,
+                  ),
+                  Text(
+                    "Couldn't load news at the time",
+                    style: GoogleFonts.poppins(fontSize: width * 0.09),
+                  ),
+                ],
               ),
             );
           } else if (snapshot.data!.articles!.isEmpty) {
@@ -74,11 +88,11 @@ class HorizontalHeadlines extends StatelessWidget {
               itemBuilder: (context, index) {
                 final dateTime = DateTime.parse(
                     snapshot.data!.articles![index].publishedAt.toString());
-    
+
                 return GestureDetector(
                   onTap: () {
-                    print(snapshot.data!.articles![index].urlToImage
-                        .toString());
+                    print(
+                        snapshot.data!.articles![index].urlToImage.toString());
                     Navigator.push(
                         context,
                         MaterialPageRoute(
